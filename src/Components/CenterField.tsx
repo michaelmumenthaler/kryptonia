@@ -1,4 +1,5 @@
 import Stack from "@mui/material/Stack";
+import ComputerImage from "../Assets/GrandmasRig.png";
 
 export default function CenterField() {
   return (
@@ -9,7 +10,16 @@ export default function CenterField() {
       justifyContent={"center"}
       flexGrow={1}
     >
-      <h1>Very big number... 100 or maybe even more..?</h1>
+      <img
+        src={ComputerImage}
+        alt="Computer"
+        width="135"
+        height="120"
+        style={{
+          imageRendering: "pixelated",
+          filter: "drop-shadow(0 0 100px #0ff)",
+        }}
+      />
     </Stack>
   );
 }
