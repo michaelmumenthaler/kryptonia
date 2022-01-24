@@ -12,7 +12,7 @@ export default function CenterField() {
       justifyContent={"center"}
       flexGrow={1}
     >
-      <a onClick={() => AlphaCoin(ac)}>
+      <a onClick={() => AlphaCoin(ac)} style={{ cursor: "pointer" }}>
         <img
           src={ComputerImage}
           alt="Computer"
