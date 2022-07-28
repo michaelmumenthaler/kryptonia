@@ -3,6 +3,7 @@ import Paper from "@mui/material/Paper";
 import CoinBar from "./Menus/CoinBar";
 import CenterField from "./CenterField";
 import Typography from "@mui/material/Typography";
+import Wallet from "./FieldComponents/Wallet";
 
 export default function Layout() {
   return (
@@ -21,9 +22,13 @@ export default function Layout() {
           backgroundSize: "1em 1em",
         }}
       >
-        <Typography variant="h2" gutterBottom component="div" paddingLeft={2}>
-          KRYPTONIA
-        </Typography>
+        <Stack>
+          <Typography variant="h2" gutterBottom component="div" paddingLeft={2}>
+            KRYPTONIA
+          </Typography>
+          <Wallet />
+        </Stack>
+
         <CenterField />
         <CoinBar />
       </Stack>

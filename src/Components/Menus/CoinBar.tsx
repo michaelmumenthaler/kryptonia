@@ -8,7 +8,7 @@ import { useState } from "react";
 
 export default function CoinBar() {
   const [modalOpen, setModalOpen] = useState(false);
-  const handleModalOpen = () => console.log("LMAO"); //setModalOpen(true);
+  const handleModalOpen = () => setModalOpen(true);
 
   return (
     <>

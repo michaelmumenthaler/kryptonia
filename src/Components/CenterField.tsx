@@ -1,9 +1,8 @@
 import Stack from "@mui/material/Stack";
 import ComputerImage from "../Assets/GrandmasRig.png";
-import AlphaCoin, { IAlphaCoin } from "./Coins/Alpha";
+import { MineAlphaCoin } from "./Coins/Alpha";
 
 export default function CenterField() {
-  const ac: IAlphaCoin = { multiplier: 1, incrementStep: 2 };
   return (
     <Stack
       alignSelf={"center"}
@@ -12,7 +11,7 @@ export default function CenterField() {
       justifyContent={"center"}
       flexGrow={1}
     >
-      <a onClick={() => AlphaCoin(ac)} style={{ cursor: "pointer" }}>
+      <a onClick={() => MineAlphaCoin()} style={{ cursor: "pointer" }}>
         <img
           src={ComputerImage}
           alt="Computer"
