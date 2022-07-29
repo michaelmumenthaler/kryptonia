@@ -1,23 +1,32 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
+import ICoin from "../Components/Coins/ICoin";
 
-export const PlayerContext = createContext({
-  PlayerName: "Anonymous",
-  Cash: 0.0,
-  Kryptons: 0.0,
-  AltCoins: [],
-  UnlockedCoins: [1], // Array for coin ID
-  updatePlayerName: (name: string) => {},
-  updateCash: (newValue: number) => {},
-  updateKryptons: (newValue: number) => {},
-  updateAltCoins: (newValue: any[]) => {},
-  updateUnlockedCoins: (newValue: any[]) => {},
+export interface IPlayerContext {
+  state: any;
+  dispatch: React.Dispatch<any>;
+}
+
+export const PlayerContext = createContext<IPlayerContext>({
+  state: {},
+  dispatch: () => null,
 });
 
-interface IPlayerContext {
+interface IPlayerContextElement {
   children?: React.ReactNode;
 }
 
-export function PlayerContextProvider(props: IPlayerContext) {
+function reducer(state: any, action: any) {
+  switch (action.type) {
+    case "increment-krypton":
+      return { ...state, Kryptons: state.Kryptons + 1 };
+    case "set-alt-coins":
+      return { ...state, AltCoins: action.payload.newAltcoinList };
+    default:
+      return state;
+  }
+}
+
+export function PlayerContextProvider(props: IPlayerContextElement) {
   let saveGame;
 
   if (localStorage.getItem("saveGame")) {
@@ -28,30 +37,15 @@ export function PlayerContextProvider(props: IPlayerContext) {
       Cash: 0.0,
       Kryptons: 0.0,
       AltCoins: [],
-      UnlockedCoins: [1],
+      UnlockedCoins: [1], // Array for coin ID
     };
   }
-  const [playerName, setPlayerName] = useState(saveGame.PlayerName);
-  const [cash, setCash] = useState(saveGame.Cash);
-  const [kryptons, setKryptons] = useState(saveGame.Kryptons);
-  const [altCoins, setAltCoins] = useState(saveGame.AltCoins);
-  const [unlockedCoins, setUnlockedCoins] = useState(saveGame.UnlockedCoins);
+
+  const [state, dispatch] = useReducer(reducer, saveGame);
+  const value = { state, dispatch };
 
   return (
-    <PlayerContext.Provider
-      value={{
-        PlayerName: playerName,
-        updatePlayerName: setPlayerName,
-        Cash: cash,
-        updateCash: setCash,
-        Kryptons: kryptons,
-        updateKryptons: setKryptons,
-        AltCoins: altCoins,
-        updateAltCoins: setAltCoins,
-        UnlockedCoins: unlockedCoins,
-        updateUnlockedCoins: setUnlockedCoins,
-      }}
-    >
+    <PlayerContext.Provider value={value}>
       {props.children}
     </PlayerContext.Provider>
   );

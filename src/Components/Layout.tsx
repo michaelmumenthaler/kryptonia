@@ -4,8 +4,17 @@ import CoinBar from "./Menus/CoinBar";
 import CenterField from "./CenterField";
 import Typography from "@mui/material/Typography";
 import Wallet from "./FieldComponents/Wallet";
+import { useContext, useEffect } from "react";
+import PlayerContext from "../Gameplay/PlayerContext";
+import { InitializeAltCoins } from "./Coins/AltCoins";
 
 export default function Layout() {
+  const game = useContext(PlayerContext);
+
+  useEffect(() => {
+    InitializeAltCoins(game);
+  }, []);
+
   return (
     <Stack
       spacing={2}
@@ -22,7 +31,7 @@ export default function Layout() {
           backgroundSize: "1em 1em",
         }}
       >
-        <Stack>
+        <Stack direction="row" justifyContent="space-between">
           <Typography variant="h2" gutterBottom component="div" paddingLeft={2}>
             KRYPTONIA
           </Typography>

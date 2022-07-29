@@ -1,12 +1,19 @@
-export const AlphaCoinValues = {
+import ICoin from "./ICoin";
+
+export const AlphaCoinValues: ICoin = {
   id: 1,
-  Name: "Alpha Coin",
-  Amount: 0,
-  Description: "Your first alt-coin!",
-  KryptonExchangeValue: 0.0001,
-  CashExchangeValue: 0.01,
-  StartAmount: 0,
-  Upgrades: [
+  unlocked: true,
+  properties: {
+    Name: "Alpha Coin",
+    Description: "Your first alt-coin!",
+  },
+  values: {
+    Amount: 0,
+    KryptonExchangeValue: 0.0001,
+    CashExchangeValue: 0.01,
+    StartAmount: 0,
+  },
+  upgrades: [
     {
       Name: "Mining efficiency",
       Description: "Reduce time to mine 1 coin",

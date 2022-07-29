@@ -1,13 +1,11 @@
-import { useContext, useEffect } from "react";
-import PlayerContext from "../../Gameplay/PlayerContext";
 import { AlphaCoinValues } from "./Alpha";
 
-export default function AltCoins() {
-  const game = useContext(PlayerContext);
+export function InitializeAltCoins(PlayerContext: any) {
   const allAltCoins = [];
+  // Add all altCoins to the array for initial load
   allAltCoins.push(AlphaCoinValues);
-
-  useEffect(() => {
-    const unlockedAltCoins = game.updateAltCoins(...game.AltCoins);
-  }, [game.UnlockedCoins]);
+  PlayerContext.dispatch({
+    type: "set-alt-coins",
+    payload: { newAltcoinList: allAltCoins },
+  });
 }

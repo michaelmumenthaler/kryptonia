@@ -1,30 +1,28 @@
 import { Stack, Typography } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PlayerContext } from "../../Gameplay/PlayerContext";
+import ICoin from "../Coins/ICoin";
 
 export function Wallet() {
-  const game = useContext(PlayerContext);
+  const { state, dispatch } = useContext(PlayerContext);
 
   return (
-    <Stack direction="column">
+    <Stack direction="column" sx={{ paddingRight: 5, paddingTop: 2 }}>
       <Stack direction="row">
-        <Typography>Cash:</Typography>
-        <Typography>{game.Cash}</Typography>
+        <Typography>{`Cash: ${state.Cash}`}</Typography>
       </Stack>
       <Stack direction="row">
-        <Typography>Kryptons:</Typography>
-        <Typography>{game.Kryptons}</Typography>
+        <Typography>{`Kryptons: ${state.Kryptons}`}</Typography>
       </Stack>
-      {game.AltCoins.length > 0 ? (
-        game.AltCoins.map((coin, index) => {
-          <Stack direction="row">
-            <Typography>{coin["Name"]}</Typography>
-            <Typography>{coin["Amount"]}</Typography>
-          </Stack>;
-        })
-      ) : (
-        <></>
-      )}
+      {state.AltCoins.map((coin: ICoin, index: number) => {
+        return (
+          <Stack direction="row" key={index}>
+            <Typography>
+              {coin.properties.Name}: {coin.values.Amount}
+            </Typography>
+          </Stack>
+        );
+      })}
     </Stack>
   );
 }
