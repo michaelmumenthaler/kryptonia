@@ -12,16 +12,28 @@ export const AlphaCoinValues: ICoin = {
     KryptonExchangeValue: 0.0001,
     CashExchangeValue: 0.01,
     StartAmount: 0,
+    IncrementValue: 1,
+    TimeToMineInSeconds: 30,
   },
   upgrades: [
     {
-      Name: "Mining efficiency",
+      Name: "Mining speed",
       Description: "Reduce time to mine 1 coin",
       AmountBought: 0,
       Value: 1,
       ValueIncrement: 1,
       BasePrice: 100,
       PriceIncrement: 1.25,
+      Limit: 999999,
+    },
+    {
+      Name: "Mining efficiency",
+      Description: "Increase mining output",
+      AmountBought: 0,
+      Value: 1,
+      ValueIncrement: 1,
+      BasePrice: 250,
+      PriceIncrement: 1.5,
       Limit: 999999,
     },
     {
@@ -32,7 +44,7 @@ export const AlphaCoinValues: ICoin = {
       BasePrice: 500,
       PriceIncrement: 1.75,
       ValueIncrement: 2,
-      Modifies: { AlphaCoin: { KryptonExchangeValue: "add", value: 0.0001 } },
+      Modifies: { 1: { KryptonExchangeValue: "add", value: 0.0001 } },
     },
   ],
 };

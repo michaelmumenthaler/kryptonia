@@ -1,5 +1,6 @@
-import { createContext, useEffect, useReducer, useState } from "react";
-import ICoin from "../Components/Coins/ICoin";
+import { createContext, useReducer } from "react";
+import { InitializeAltCoins } from "../Components/Coins/AltCoins";
+import reducer from "./Reducer";
 
 export interface IPlayerContext {
   state: any;
@@ -15,17 +16,6 @@ interface IPlayerContextElement {
   children?: React.ReactNode;
 }
 
-function reducer(state: any, action: any) {
-  switch (action.type) {
-    case "increment-krypton":
-      return { ...state, Kryptons: state.Kryptons + 1 };
-    case "set-alt-coins":
-      return { ...state, AltCoins: action.payload.newAltcoinList };
-    default:
-      return state;
-  }
-}
-
 export function PlayerContextProvider(props: IPlayerContextElement) {
   let saveGame;
 
@@ -36,8 +26,14 @@ export function PlayerContextProvider(props: IPlayerContextElement) {
       PlayerName: "Anonymous",
       Cash: 0.0,
       Kryptons: 0.0,
-      AltCoins: [],
-      UnlockedCoins: [1], // Array for coin ID
+      AltCoins: InitializeAltCoins(),
+      // Array for coin ID
+      UnlockedCoins: [1],
+      /* Active miners:
+       {id:123, progress: 50} Object of Coin ID to represent 
+        active mining of a coin and progress in %
+      */
+      activeMiners: [],
     };
   }
 

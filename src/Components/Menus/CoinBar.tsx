@@ -1,6 +1,5 @@
 import Stack from "@mui/material/Stack";
-import Paper from "@mui/material/Paper";
-import { Dialog, Divider, Fab, Modal, Typography } from "@mui/material";
+import { Divider, Fab } from "@mui/material";
 import DisplaySettingsIcon from "@mui/icons-material/DisplaySettings";
 import CoinButton from "./CoinButton";
 import MenuModal from "./MenuModal";

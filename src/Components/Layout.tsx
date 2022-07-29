@@ -1,20 +1,10 @@
 import Stack from "@mui/material/Stack";
-import Paper from "@mui/material/Paper";
 import CoinBar from "./Menus/CoinBar";
 import CenterField from "./CenterField";
 import Typography from "@mui/material/Typography";
 import Wallet from "./FieldComponents/Wallet";
-import { useContext, useEffect } from "react";
-import PlayerContext from "../Gameplay/PlayerContext";
-import { InitializeAltCoins } from "./Coins/AltCoins";
 
 export default function Layout() {
-  const game = useContext(PlayerContext);
-
-  useEffect(() => {
-    InitializeAltCoins(game);
-  }, []);
-
   return (
     <Stack
       spacing={2}
