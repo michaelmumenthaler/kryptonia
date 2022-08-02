@@ -34,6 +34,7 @@ export function PlayerContextProvider(props: IPlayerContextElement) {
         active mining of a coin and progress in %
       */
       activeMiners: [],
+      coinUpgradeModifiers: [], // Array for specific increment modifiers
     };
   }
 

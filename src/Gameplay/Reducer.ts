@@ -1,18 +1,33 @@
 export default function reducer(state: any, action: any) {
   switch (action.type) {
+    case "mine":
+      let checkIfCoinIsAlreadyMining = state.activeMiners.filter(
+        (miner: any) => miner.id === action.payload.id
+      );
+
+      if (checkIfCoinIsAlreadyMining.length > 0) {
+        return { ...state };
+      }
+      return {
+        ...state,
+        activeMiners: [
+          ...state.activeMiners,
+          { id: action.payload.id, progress: action.payload.progress },
+        ],
+      };
     case "increment":
-      let coin = state.AltCoins.filter(
+      let coin = state.AltCoins.find(
         (coin: any) => coin.id === action.payload.id
       );
       const otherCoins = state.AltCoins.filter(
         (coin: any) => coin.id !== action.payload.id
       );
 
-      coin[0].values.Amount += coin[0].values.IncrementValue;
+      coin.values.Amount += action.payload.IncrementValue;
 
       return {
         ...state,
-        AltCoins: [...otherCoins, coin[0]],
+        AltCoins: [...otherCoins, coin],
       };
     case "set-alt-coins":
       return { ...state, AltCoins: action.payload.newAltcoinList };
@@ -22,7 +37,9 @@ export default function reducer(state: any, action: any) {
         Cash: 0.0,
         Kryptons: 0.0,
         AltCoins: [],
+        activeMiners: [],
         UnlockedCoins: [1], // Array for coin ID
+        coinUpgradeModifiers: [], // Array for specific increment modifiers
       };
     default:
       return state;

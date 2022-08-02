@@ -1,12 +1,21 @@
 import Stack from "@mui/material/Stack";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ComputerImage from "../Assets/GrandmasRig.png";
 import PlayerContext from "../Gameplay/PlayerContext";
 import { MineAlphaCoin } from "./Coins/Alpha";
 import { LinearProgress, Typography } from "@mui/material";
+import ICoin from "./Coins/ICoin";
 
 export default function CenterField() {
   const { state, dispatch } = useContext(PlayerContext);
+
+  const currentSelectedCoin = state.AltCoins.find(
+    (altCoin: any) => altCoin.id === 1
+  );
+
+  const handleMiningButton = () => {
+    MineAlphaCoin(state, dispatch);
+  };
 
   return (
     <Stack
@@ -24,27 +33,28 @@ export default function CenterField() {
         alignItems="center"
         gap={3}
       >
-        <LinearProgress
-          variant="determinate"
-          value={50}
-          sx={{
-            borderRadius: 1,
-            minWidth: "100%",
-            minHeight: "1.5vh",
-            transition: "none",
-          }}
-          color="info"
-        />
-      </Stack>
-      <a
-        onClick={() =>
-          dispatch({
-            type: "increment",
-            payload: { id: 1 },
+        {state.activeMiners.length <= 0 ? (
+          <></>
+        ) : (
+          state.activeMiners.map((miner: any, index: number) => {
+            return (
+              <LinearProgress
+                variant="determinate"
+                value={miner.progress}
+                sx={{
+                  borderRadius: 1,
+                  minWidth: "100%",
+                  minHeight: "1.5vh",
+                  transition: "none",
+                }}
+                key={index}
+                color="info"
+              />
+            );
           })
-        }
-        style={{ cursor: "pointer" }}
-      >
+        )}
+      </Stack>
+      <a onClick={() => handleMiningButton()} style={{ cursor: "pointer" }}>
         <img
           src={ComputerImage}
           alt="Computer"
