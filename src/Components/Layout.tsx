@@ -3,8 +3,14 @@ import CoinBar from "./Menus/CoinBar";
 import CenterField from "./CenterField";
 import Typography from "@mui/material/Typography";
 import Wallet from "./FieldComponents/Wallet";
+import { useContext, useEffect } from "react";
+import useGameLoop from "../Gameplay/GameLoop";
+import { PlayerContext } from "../Gameplay/PlayerContext";
 
 export default function Layout() {
+  const { state, dispatch } = useContext(PlayerContext);
+  useGameLoop(state, dispatch);
+
   return (
     <Stack
       spacing={2}
