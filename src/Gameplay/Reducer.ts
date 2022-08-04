@@ -1,6 +1,6 @@
 export default function reducer(state: any, action: any) {
   switch (action.type) {
-    case "addMiner":
+    case "add-miner":
       let checkIfCoinIsAlreadyMining = state.activeMiners.filter(
         (miner: any) => miner.id === action.payload.id
       );
