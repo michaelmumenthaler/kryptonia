@@ -1,6 +1,4 @@
 import ICoin from "./ICoin";
-import { useContext } from "react";
-import PlayerContext from "../../Gameplay/PlayerContext";
 
 export const AlphaCoinValues: ICoin = {
   id: 1,
