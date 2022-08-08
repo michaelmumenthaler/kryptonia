@@ -13,7 +13,7 @@ export const AlphaCoinValues: ICoin = {
     CashExchangeValue: 0.01,
     StartAmount: 0,
     IncrementValue: 1, // Final calculated value to increment coin (After modifiers etc.)
-    TimeToMineInSeconds: 30,
+    TimeToMineInMS: 30000,
   },
   upgrades: [
     {
@@ -50,6 +50,5 @@ export const AlphaCoinValues: ICoin = {
 };
 
 export function MineAlphaCoin(state: any, dispatch: any) {
-  console.log(state.activeMiners);
-  dispatch({ type: "mine", payload: { id: 1, progress: 10 } });
+  dispatch({ type: "add-miner", payload: { id: 1 } });
 }

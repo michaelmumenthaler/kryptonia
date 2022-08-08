@@ -1,6 +1,8 @@
 export default function reducer(state: any, action: any) {
   switch (action.type) {
     case "add-miner":
+      console.log("add-miner");
+      console.log(action);
       let checkIfCoinIsAlreadyMining = state.activeMiners.filter(
         (miner: any) => miner.id === action.payload.id
       );
@@ -12,9 +14,16 @@ export default function reducer(state: any, action: any) {
         ...state,
         activeMiners: [
           ...state.activeMiners,
-          { id: action.payload.id, progress: action.payload.progress },
+          {
+            id: action.payload.id,
+            progress: 0,
+            lastMined: Date.now(),
+          },
         ],
       };
+    case "remove-miner":
+      // TODO: add removal of completed miners here
+      return { ...state };
     case "mine":
       // TODO: add mining logic here
       return { ...state };

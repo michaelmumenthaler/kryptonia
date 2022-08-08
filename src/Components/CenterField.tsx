@@ -54,7 +54,7 @@ export default function CenterField() {
           })
         )}
       </Stack>
-      <a onClick={() => handleMiningButton()} style={{ cursor: "pointer" }}>
+      <a onClick={handleMiningButton} style={{ cursor: "pointer" }}>
         <img
           src={ComputerImage}
           alt="Computer"
