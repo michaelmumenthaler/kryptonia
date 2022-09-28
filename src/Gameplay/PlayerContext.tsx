@@ -35,7 +35,7 @@ export function PlayerContextProvider(props: IPlayerContextElement) {
       */
       activeMiners: [],
       coinUpgradeModifiers: [], // Array for specific increment modifiers
-      lastSaved: Date.now()
+      lastSaved: Date.now(),
     };
   }
 
