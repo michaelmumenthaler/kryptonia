@@ -1,8 +1,7 @@
 export default function reducer(state: any, action: any) {
   switch (action.type) {
     case "add-miner":
-      console.log("add-miner");
-      console.log(action);
+
       let checkIfCoinIsAlreadyMining = state.activeMiners.filter(
         (miner: any) => miner.id === action.payload.id
       );
@@ -10,23 +9,43 @@ export default function reducer(state: any, action: any) {
       if (checkIfCoinIsAlreadyMining.length > 0) {
         return { ...state };
       }
+
+      // return the state with the new miner added to the active miners array
       return {
         ...state,
         activeMiners: [
           ...state.activeMiners,
           {
             id: action.payload.id,
+            firstMined: Date.now(),
             progress: 0,
-            lastMined: Date.now(),
           },
         ],
       };
+
     case "remove-miner":
-      // TODO: add removal of completed miners here
-      return { ...state };
+      // return the state with the miner removed from the active miners array
+      let coinID = action.payload.id;
+      console.log("Removing miner for coin: " + coinID);
+      let newActiveMiners = state.activeMiners.filter(
+        (miner: any) => miner.id !== coinID
+      );
+
+      return {
+        ...state,
+        activeMiners: newActiveMiners,
+      };
+
     case "mine":
-      // TODO: add mining logic here
-      return { ...state };
+      let newProgress = action.payload.progress
+      console.log("Mining coin: " + action.payload.id + " with progress: " + newProgress);  
+      return { ...state, activeMiners: [ {
+        id: action.payload.id,
+        progress: newProgress,
+        lastMined: Date.now(),
+        firstMined: state.activeMiners.find((miner: any) => miner.id === action.payload.id).firstMined
+
+      }] };
     case "increment":
       let coin = state.AltCoins.find(
         (coin: any) => coin.id === action.payload.id
