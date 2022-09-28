@@ -1,5 +1,4 @@
-import { useContext, useEffect } from "react";
-import PlayerContext from "./PlayerContext";
+import { useEffect } from "react";
 
 export default function useGameLoop(state: any, dispatch: React.Dispatch<any>) {
 
