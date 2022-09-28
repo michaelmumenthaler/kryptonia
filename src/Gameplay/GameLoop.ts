@@ -45,8 +45,18 @@ export default function useGameLoop(state: any, dispatch: React.Dispatch<any>) {
       }
     });
 
-    console.log(state)
-    console.log(state.activeMiners)
+    //console.log(state)
+    //console.log(state.activeMiners)
+
+    // Save the game if no savegame is found in local storage
+    // save the game if the savegame is older than 30 seconds
+    if (localStorage.getItem("saveGame") === null || Date.now() - state.lastSaved > 30000) {
+      console.log("Saving game...");
+      dispatch({
+        type: "save-game",
+      });
+    }
+
 
 
   }, 100);

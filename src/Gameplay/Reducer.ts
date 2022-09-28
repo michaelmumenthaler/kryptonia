@@ -26,7 +26,7 @@ export default function reducer(state: any, action: any) {
     case "remove-miner":
       // return the state with the miner removed from the active miners array
       let coinID = action.payload.id;
-      console.log("Removing miner for coin: " + coinID);
+      //console.log("Removing miner for coin: " + coinID);
       let newActiveMiners = state.activeMiners.filter(
         (miner: any) => miner.id !== coinID
       );
@@ -38,7 +38,7 @@ export default function reducer(state: any, action: any) {
 
     case "mine":
       let newProgress = action.payload.progress
-      console.log("Mining coin: " + action.payload.id + " with progress: " + newProgress);  
+      //console.log("Mining coin: " + action.payload.id + " with progress: " + newProgress);  
       return { ...state, activeMiners: [ {
         id: action.payload.id,
         progress: newProgress,
@@ -72,6 +72,11 @@ export default function reducer(state: any, action: any) {
         UnlockedCoins: [1], // Array for coin ID
         coinUpgradeModifiers: [], // Array for specific increment modifiers
       };
+    case "save-game":
+      // Save the game to local storage
+      console.log("Saving game...");
+      localStorage.setItem("saveGame", JSON.stringify(state));
+      return { ...state, lastSaved: Date.now() };
     default:
       return state;
   }

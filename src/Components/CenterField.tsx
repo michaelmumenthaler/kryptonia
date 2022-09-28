@@ -24,7 +24,7 @@ export default function CenterField() {
       width={"50vw"}
       alignItems={"center"}
       justifyContent={"center"}
-      flexGrow={1}
+      flexGrow={0}
       gap={2}
     >
       <Stack
