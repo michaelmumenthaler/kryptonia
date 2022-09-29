@@ -25,6 +25,7 @@ export default function useGameLoop(state: any, dispatch: React.Dispatch<any>) {
           });
 
           if (coin.values.AutoMiner === true) {
+            // Reset the miner if Autominer is true
             dispatch({
               type: "reset-miner",
               payload: {
@@ -57,12 +58,9 @@ export default function useGameLoop(state: any, dispatch: React.Dispatch<any>) {
 
       // save the game if the savegame is older than 30 seconds
       if (Date.now() - state.lastSaved > 30000) {
-        // Save the game if no savegame is found in local storage
-        if (localStorage.getItem("saveGame") === null) {
-          dispatch({
-            type: "save-game",
-          });
-        }
+        dispatch({
+          type: "save-game",
+        });
       }
     }, 100);
     return () => clearInterval(intervalID);
