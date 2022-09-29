@@ -22,6 +22,23 @@ export default function reducer(state: any, action: any) {
         ],
       };
 
+    case "reset-miner":
+      let coinToReset = action.payload.id;
+
+      return {
+        ...state,
+        activeMiners: [
+          ...state.activeMiners.filter(
+            (miner: any) => miner.id !== coinToReset
+          ),
+          {
+            id: action.payload.id,
+            firstMined: Date.now(),
+            progress: 0,
+          },
+        ],
+      };
+
     case "remove-miner":
       // return the state with the miner removed from the active miners array
       let coinID = action.payload.id;

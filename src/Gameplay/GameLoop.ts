@@ -23,14 +23,23 @@ export default function useGameLoop(state: any, dispatch: React.Dispatch<any>) {
               IncrementValue: coin.values.IncrementValue,
             },
           });
-          // Remove active miner from state after mining
-          dispatch({
-            type: "remove-miner",
-            payload: {
-              id: coin.id,
-              progress: 0,
-            },
-          });
+
+          if (coin.values.AutoMiner === true) {
+            dispatch({
+              type: "reset-miner",
+              payload: {
+                id: coin.id,
+              },
+            });
+          } else {
+            // Remove active miner from state after mining
+            dispatch({
+              type: "remove-miner",
+              payload: {
+                id: coin.id,
+              },
+            });
+          }
         } else {
           // if the time difference is less than the time to mine then increment the progress by the time difference
           dispatch({
@@ -46,15 +55,14 @@ export default function useGameLoop(state: any, dispatch: React.Dispatch<any>) {
       //console.log(state)
       //console.log(state.activeMiners)
 
-      // Save the game if no savegame is found in local storage
       // save the game if the savegame is older than 30 seconds
-      if (
-        localStorage.getItem("saveGame") === null ||
-        Date.now() - state.lastSaved > 30000
-      ) {
-        dispatch({
-          type: "save-game",
-        });
+      if (Date.now() - state.lastSaved > 30000) {
+        // Save the game if no savegame is found in local storage
+        if (localStorage.getItem("saveGame") === null) {
+          dispatch({
+            type: "save-game",
+          });
+        }
       }
     }, 100);
     return () => clearInterval(intervalID);

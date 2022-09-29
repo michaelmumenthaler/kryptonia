@@ -14,6 +14,7 @@ export const AlphaCoinValues: ICoin = {
     StartAmount: 0,
     IncrementValue: 1, // Final calculated value to increment coin (After modifiers etc.)
     TimeToMineInMS: 30000,
+    AutoMiner: false,
   },
   upgrades: [
     {

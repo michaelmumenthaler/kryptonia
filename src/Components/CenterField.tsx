@@ -34,7 +34,18 @@ export default function CenterField() {
         gap={3}
       >
         {state.activeMiners.length <= 0 ? (
-          <></>
+          <LinearProgress
+            variant="determinate"
+            value={0}
+            sx={{
+              borderRadius: 1,
+              minWidth: "100%",
+              minHeight: "1.5vh",
+              transition: "none",
+            }}
+            key={0}
+            color="info"
+          />
         ) : (
           state.activeMiners.map((miner: any, index: number) => {
             return (
