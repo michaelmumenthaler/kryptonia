@@ -18,6 +18,17 @@ export const AlphaCoinValues: ICoin = {
   },
   upgrades: [
     {
+      Name: "Auto Miner",
+      Description: "Mines your coin automatically",
+      AmountBought: 0,
+      Value: 0,
+      ValueIncrement: 0,
+      BasePrice: 10,
+      PriceIncrement: 0,
+      Limit: 1,
+      Modifies: { 1: { AutoMiner: "set", value: true } },
+    },
+    {
       Name: "Mining speed",
       Description: "Reduce time to mine 1 coin",
       AmountBought: 0,
